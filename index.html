@@ -160,7 +160,7 @@
   /* Slide 3 Video/GIF Media Box */
   .media-box {
     width: 100%;
-    height: 260px;
+    height: 280px;
     background: #1c1917;
     border: 2px dashed var(--orange);
     border-radius: 14px;
@@ -170,7 +170,6 @@
     justify-content: center;
     color: #a8a29e;
     text-align: center;
-    padding: 16px;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
@@ -181,6 +180,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 12px;
+    display: block;
   }
 
   /* CTA Button for Slide 5 */
@@ -255,16 +255,18 @@
 
 <div class="deck">
 
-  <!-- SLIDE 1: Catchy Opening -->
-  <div class="slide slide-dark active">
-    <div>
-      <div class="badge">Campus Reach</div>
-      <h1 class="title" style="color:#fff;">Reach Students Where They Check Their Meals Everyday!</h1>
-      <div class="title-kr">매일 식단을 확인하는 대학생 필수 길목 노출</div>
-    </div>
-    
-    <div class="card" style="background:#292524; border-color:#444; color:#fff;">
-      <p style="margin:0 0 8px 0; font-size:14px;">🔥 <strong>Aprox. 300</strong> Daily Active Students (300명 유저)</p>
+  <!-- SLIDE 1: Catchy Hero Opening -->
+  <div class="slide slide-dark active" style="justify-content: space-between;">
+    <div style="display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 10px 0;">
+      <div class="badge" style="margin-bottom: 16px;">Campus Reach</div>
+      <h1 class="title" style="color:#fff; font-size: 28px; line-height: 1.3; margin: 0 0 8px 0;">Reach Students Where They Check Their Meals Everyday!</h1>
+      <div class="title-kr" style="font-size: 15px; color: var(--orange); margin-bottom: 32px;">매일 식단을 확인하는 대학생 필수 길목 노출</div>
+
+      <div class="card" style="background:#292524; border-color:#444; color:#fff; text-align: center; padding: 28px 16px; border-radius: 16px;">
+        <div style="font-size: 44px; font-weight: 800; color: var(--orange); margin-bottom: 4px;">🔥 ~300</div>
+        <div style="font-size: 16px; font-weight: 700; color: #ffffff;">Daily Active Students</div>
+        <div style="font-size: 13px; color: #a8a29e; margin-top: 6px;">매일 접속하는 300명의 활성 대학생 유저</div>
+      </div>
     </div>
 
     <div class="slide-footer">
@@ -321,30 +323,12 @@
       <div class="title-kr">실제 라이브 회전 배너 시연</div>
     </div>
 
-    <!-- MEDIA PLACEHOLDER BOX -->
+    <!-- MEDIA BOX WITH ACTIVE VIDEO -->
     <div class="media-box" id="mediaContainer">
-      <div id="placeholderText">
-        <p style="font-size:28px; margin:0 0 6px 0;">🎬</p>
-        <p style="font-weight:bold; color:#fff; margin:0 0 4px 0;">Video / GIF Placeholder</p>
-        <p style="font-size:11px; margin:0;">Replace this element with your clip or MP4</p>
-      </div>
-
-      <!-- 
-        ========================================================================
-        HOW TO LOAD YOUR VIDEO OR GIF LATER:
-        ========================================================================
-        Option A (Animated GIF):
-        Uncomment the line below and replace "your_carousel_demo.gif" with your file path:
-        <img src="your_carousel_demo.gif" alt="Live Carousel Demo">
-
-        Option B (Short MP4 Video):
-        Uncomment the video block below and replace "your_carousel_demo.mp4" with your video path:
-
-        ========================================================================
-      -->
-        <video autoplay loop muted playsinline>
-          <source src="carousel_demo.mp4" type="video/mp4">
-        </video>
+      <video autoplay loop muted playsinline>
+        <source src="carousel_demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
 
     <div class="slide-footer">
@@ -481,7 +465,6 @@
     const diffX = touchStartX - touchEndX;
     const diffY = touchStartY - touchEndY;
 
-    // Trigger slide change if horizontal drag is dominant and over threshold
     if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
       if (diffX > 0) nextSlide(); // Swiped left -> Next
       else prevSlide();          // Swiped right -> Previous
