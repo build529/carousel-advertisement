@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store Partner Pitch Deck</title>
+<style>
+  :root {
+    --bg-dark: #1c1917;
+    --bg-light: #f7f4ef;
+    --card-bg: #ffffff;
+    --orange: #ea580c;
+    --green: #15803d;
+    --text-dark: #1c1917;
+    --text-muted: #666059;
+    --border: #e5e0d8;
+    --gray-inactive: #9ca3af;
+  }
+
+  body {
+    margin: 0;
+    padding: 16px;
+    background: #12100e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .deck {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .slide {
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 520px;
+  }
+
+  .slide-dark {
+    background: var(--bg-dark);
+    color: #ffffff;
+  }
+
+  .badge {
+    background: var(--orange);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    width: fit-content;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 10px 0 2px 0;
+    line-height: 1.25;
+  }
+
+  .title-kr {
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+  }
+
+  .card-kr {
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  /* Compare Grid for Slide 4 */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .plan-card {
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .plan-old {
+    background: #e5e7eb;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+  }
+
+  .plan-new {
+    background: #ffffff;
+    border: 2px solid var(--green);
+    box-shadow: 0 4px 12px rgba(21, 128, 61, 0.15);
+  }
+
+  .price-tag {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 6px 0;
+  }
+
+  /* Slide 3 Video/GIF Media Box */
+  .media-box {
+    width: 100%;
+    height: 260px;
+    background: #1c1917;
+    border: 2px dashed var(--orange);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #a8a29e;
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-box video, .media-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* CTA Button for Slide 5 */
+  .cta-btn {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+  }
+
+  .footer-num {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- SLIDE 1: Catchy Opening -->
+  <div class="slide slide-dark">
+    <div>
+      <div class="badge">Campus Reach</div>
+      <h1 class="title" style="color:#fff;">Reach Students Where They Check Their Meals Everyday!</h1>
+      <div class="title-kr">매일 식단을 확인하는 대학생 필수 길목 노출</div>
+    </div>
+    
+    <div class="card" style="background:#292524; border-color:#444; color:#fff;">
+      <p style="margin:0 0 8px 0; font-size:14px;">🔥 <strong>Aprox. 300</strong> Daily Active Students (300명 유저)</p>
+      <p style="margin:0 0 8px 0; font-size:14px;">🔄 <strong>3–5x</strong> Daily Visits per Student (하루 3-5회 접속)</p>
+      <p style="margin:0; font-size:14px;">⚡ <strong>23s</strong> Avg Foreground Focus (23초 평균 몰입)</p>
+    </div>
+
+    <div class="footer-num" style="color:#a8a29e;">01 / 05</div>
+  </div>
+
+  <!-- SLIDE 2: Three Vertical Cards -->
+  <div class="slide">
+    <div>
+      <div class="badge">Audience Impact</div>
+      <h2 class="title">Why Campus Ads Work Here</h2>
+      <div class="title-kr">높은 몰입도의 대학생 타깃 플랫폼</div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">1. Fast Growing (~300 Daily Users)</div>
+        <div class="card-kr">빠르게 성장하는 활성 사용자 수</div>
+        <p class="card-desc">Rapid weekly expansion from 200 → 250 → almost 300 daily active campus users.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2. Always Hungry Target Audience</div>
+        <div class="card-kr">식사 메뉴를 찾는 구매 의도 높은 학생</div>
+        <p class="card-desc">Students check daily cafeteria menus, making it prime spot to feature nearby food options.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">3. Rotating Live Placement</div>
+        <div class="card-kr">시선을 사로잡는 라이브 자동 배너</div>
+        <p class="card-desc">Catchy dynamic visual banners directly presented to students deciding where to eat.</p>
+      </div>
+    </div>
+
+    <div class="footer-num">02 / 05</div>
+  </div>
+
+  <!-- SLIDE 3: Video / GIF Demo Place -->
+  <div class="slide">
+    <div>
+      <div class="badge">Live Demo</div>
+      <h2 class="title">See the Carousel Banner in Action</h2>
+      <div class="title-kr">실제 라이브 회전 배너 시연</div>
+    </div>
+
+    <!-- MEDIA PLACEHOLDER BOX -->
+    <div class="media-box" id="mediaContainer">
+      <div id="placeholderText">
+        <p style="font-size:28px; margin:0 0 6px 0;">🎬</p>
+        <p style="font-weight:bold; color:#fff; margin:0 0 4px 0;">Video / GIF Placeholder</p>
+        <p style="font-size:11px; margin:0;">Replace this element with your clip or MP4</p>
+      </div>
+
+      <!-- 
+        ========================================================================
+        HOW TO LOAD YOUR VIDEO OR GIF LATER:
+        ========================================================================
+        Option A (Animated GIF):
+        Uncomment the line below and replace "your_carousel_demo.gif" with your file path:
+        <img src="your_carousel_demo.gif" alt="Live Carousel Demo">
+
+        Option B (Short MP4 Video):
+        Uncomment the video block below and replace "your_carousel_demo.mp4" with your video path:
+        <video autoplay loop muted playsinline>
+          <source src="your_carousel_demo.mp4" type="video/mp4">
+        </video>
+        ========================================================================
+      -->
+    </div>
+
+    <div class="footer-num">03 / 05</div>
+  </div>
+
+  <!-- SLIDE 4: Old vs New Plan Comparison -->
+  <div class="slide">
+    <div>
+      <div class="badge">Plan Comparison</div>
+      <h2 class="title">Static Banner vs Interactive Carousel</h2>
+      <div class="title-kr">기존 고정 배너 vs 신규 카러셀 배너 비교</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Old Plan -->
+      <div class="plan-card plan-old">
+        <div>
+          <span style="font-size:9px; font-weight:bold; background:#9ca3af; color:white; padding:2px 6px; border-radius:4px;">DISCONTINUED</span>
+          <h3 style="font-size:13px; margin:6px 0 2px 0;">Static Banner</h3>
+          <div style="font-size:10px; color:#6b7280; font-weight:bold;">기존 고정 배너</div>
+          <div class="price-tag" style="color:#6b7280;">₩30,000 <span style="font-size:10px; font-weight:normal;">/wk</span></div>
+          <p style="font-size:11px; margin:0; line-height:1.3;">Static image, promotional slogan, map link. Single fixed store display.</p>
+        </div>
+      </div>
+
+      <!-- New Plan -->
+      <div class="plan-card plan-new">
+        <div>
+          <span style="font-size:9px; font-weight:bold; background:var(--green); color:white; padding:2px 6px; border-radius:4px;">MOST POPULAR</span>
+          <h3 style="font-size:13px; margin:6px 0 2px 0;">Live Carousel</h3>
+          <div style="font-size:10px; color:var(--green); font-weight:bold;">신규 라이브 카러셀</div>
+          <div class="price-tag" style="color:var(--green);">₩20,000 <span style="font-size:10px; font-weight:normal;">/wk</span></div>
+          <p style="font-size:11px; margin:0; line-height:1.3;">Shared top spot (max 3 stores). Live hours indicator, interactive motion & lower cost!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-num">04 / 05</div>
+  </div>
+
+  <!-- SLIDE 5: Call to Action -->
+  <div class="slide slide-dark">
+    <div style="text-align:center; margin-auto:0; display:flex; flex-direction:column; justify-content:center; height:100%;">
+      <div class="badge" style="margin:0 auto 12px auto;">Get Ahead</div>
+      <h2 class="title" style="color:#fff; font-size:24px;">Become the #1 Choice When Students Are Hungry</h2>
+      <div class="title-kr" style="color:#a8a29e; font-size:14px; margin-bottom:20px;">배고픈 학생들이 가장 먼저 떠올리는 매장이 되세요</div>
+
+      <div class="card" style="background:#292524; border-color:#444; color:#fff; text-align:left;">
+        <p style="margin:0 0 6px 0; font-size:13px;">✓ <strong>Lock in the ₩20,000/week promo rate</strong> (주 2만원 서포트가)</p>
+        <p style="margin:0 0 6px 0; font-size:13px;">✓ <strong>Share shop photo & slogan</strong> (사진/문구만 전달하면 끝)</p>
+        <p style="margin:0; font-size:13px;">✓ <strong>Live in under 5 minutes</strong> (5분 내 세팅 완료)</p>
+      </div>
+
+      <a href="https://open.kakao.com" class="cta-btn">Join Smart Advertisement Today →</a>
+    </div>
+
+    <div class="footer-num" style="color:#a8a29e;">05 / 05</div>
+  </div>
+
+</div>
+
+</body>
+</html>
