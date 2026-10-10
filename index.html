@@ -1,272 +1,497 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Presentation Slides</title>
-  <style>
-    :root {
-      --bg: #e9ece9;
-      --slide-bg: #ffffff;
-      --ink: #202a2b;
-      --muted: #63706e;
-      --accent: #247052;
-      --line: #dce3df;
-      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store Partner Pitch Deck</title>
+<style>
+  :root {
+    --bg-dark: #1c1917;
+    --bg-light: #f7f4ef;
+    --card-bg: #ffffff;
+    --orange: #ea580c;
+    --green: #15803d;
+    --text-dark: #1c1917;
+    --text-muted: #666059;
+    --border: #e5e0d8;
+    --gray-inactive: #9ca3af;
+  }
 
-    * { box-sizing: border-box; }
+  * { box-sizing: border-box; }
 
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+  body {
+    margin: 0;
+    padding: 16px;
+    background: #12100e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    touch-action: pan-y;
+  }
 
-    /* Fixed aspect ratio canvas centered on screen */
-    #canvas {
-      width: 1920px;
-      height: 1080px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-origin: center;
-      touch-action: pan-y;
-    }
+  .deck {
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+  }
 
-    /* Slide container setup */
-    .slide {
-      display: none;
-      position: absolute;
-      inset: 0;
-      padding: 88px 160px 49px;
-      background: var(--slide-bg);
-      flex-direction: column;
-    }
+  /* Slide layout - 1 slide per page */
+  .slide {
+    display: none;
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 560px;
+    user-select: none;
+  }
 
-    /* Only show active slide */
-    .slide.active {
-      display: flex;
-    }
+  /* Show active slide only */
+  .slide.active {
+    display: flex;
+    animation: fadeIn 0.25s ease-out;
+  }
 
-    /* Content Area Layout */
-    .tag {
-      color: var(--accent);
-      font-size: 24px;
-      font-weight: 650;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0.4; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
-    h1 {
-      font-size: 80px;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      margin: 0 0 20px 0;
-    }
+  .slide-dark {
+    background: var(--bg-dark);
+    color: #ffffff;
+  }
 
-    p {
-      font-size: 36px;
-      line-height: 1.6;
-      color: var(--muted);
-      margin: 0;
-    }
+  .badge {
+    background: var(--orange);
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    width: fit-content;
+  }
 
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+  .title {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 10px 0 2px 0;
+    line-height: 1.25;
+  }
 
-    /* Footer Navigation */
-    .slide-footer {
-      height: 60px;
-      flex: none;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 22px;
-      color: var(--muted);
-    }
+  .title-kr {
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
 
-    .footer-controls button {
-      background: none;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 8px 20px;
-      font-size: 20px;
-      color: var(--ink);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
 
-    .footer-controls button:hover:not(:disabled) {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+  }
 
-    .footer-controls button:disabled {
-      opacity: 0.3;
-      cursor: default;
-    }
+  .card-kr {
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
 
-    .counter {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      color: var(--accent);
-    }
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.35;
+  }
 
-    /* Slide transition animation */
-    @media (prefers-reduced-motion: no-preference) {
-      .slide.active .content {
-        animation: appear 0.2s ease-out;
-      }
-    }
+  /* Compare Grid for Slide 4 */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
 
-    @keyframes appear {
-      from { opacity: 0.3; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  .plan-card {
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .plan-old {
+    background: #e5e7eb;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+  }
+
+  .plan-new {
+    background: #ffffff;
+    border: 2px solid var(--green);
+    box-shadow: 0 4px 12px rgba(21, 128, 61, 0.15);
+  }
+
+  .price-tag {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 6px 0;
+  }
+
+  /* Slide 3 Video/GIF Media Box */
+  .media-box {
+    width: 100%;
+    height: 260px;
+    background: #1c1917;
+    border: 2px dashed var(--orange);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #a8a29e;
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-box video, .media-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* CTA Button for Slide 5 */
+  .cta-btn {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+  }
+
+  /* Interactive Slide Footer Controls */
+  .slide-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .slide-dark .slide-footer {
+    border-top-color: #332e2b;
+  }
+
+  .nav-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    background: #e5e0d8;
+    border: none;
+    color: var(--text-dark);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .slide-dark .nav-btn {
+    background: #292524;
+    color: #ffffff;
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: var(--orange);
+    color: #ffffff;
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .footer-num {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+</style>
 </head>
 <body>
 
-  <main id="canvas">
+<div class="deck">
+
+  <!-- SLIDE 1: Catchy Opening -->
+  <div class="slide slide-dark active">
+    <div>
+      <div class="badge">Campus Reach</div>
+      <h1 class="title" style="color:#fff;">Reach Students Where They Check Their Meals Everyday!</h1>
+      <div class="title-kr">매일 식단을 확인하는 대학생 필수 길목 노출</div>
+    </div>
     
-    <!-- Slide 1 -->
-    <section class="slide active">
-      <div class="tag">Week 04 · Introduction</div>
-      <div class="content">
-        <h1>Vue.js & API Integration</h1>
-        <p>Learn how to connect single-page applications to live external APIs step-by-step.</p>
+    <div class="card" style="background:#292524; border-color:#444; color:#fff;">
+      <p style="margin:0 0 8px 0; font-size:14px;">🔥 <strong>Aprox. 300</strong> Daily Active Students (300명 유저)</p>
+      <p style="margin:0 0 8px 0; font-size:14px;">🔄 <strong>3–5x</strong> Daily Visits per Student (하루 3-5회 접속)</p>
+      <p style="margin:0; font-size:14px;">⚡ <strong>23s</strong> Avg Foreground Focus (23초 평균 몰입)</p>
+    </div>
+
+    <div class="slide-footer">
+      <div class="nav-btns">
+        <button class="nav-btn btn-prev" onclick="prevSlide()">← Prev</button>
+        <button class="nav-btn btn-next" onclick="nextSlide()">Next →</button>
       </div>
-      <footer class="slide-footer">
-        <div>Course Name</div>
-        <div class="footer-controls">
-          <button class="btn-prev" onclick="prevSlide()">Previous</button>
-          <button class="btn-next" onclick="nextSlide()">Next</button>
-        </div>
-        <div>Slide <span class="counter">1 / 3</span></div>
-      </footer>
-    </section>
+      <div class="footer-num" style="color:#a8a29e;">01 / 05</div>
+    </div>
+  </div>
 
-    <!-- Slide 2 -->
-    <section class="slide">
-      <div class="tag">Overview</div>
-      <div class="content">
-        <h1>Today's Objectives</h1>
-        <p>1. Create an API account.<br>2. Run local starter project.<br>3. Fetch movie details via JSON.</p>
+  <!-- SLIDE 2: Three Vertical Cards -->
+  <div class="slide">
+    <div>
+      <div class="badge">Audience Impact</div>
+      <h2 class="title">Why Campus Ads Work Here</h2>
+      <div class="title-kr">높은 몰입도의 대학생 타깃 플랫폼</div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">1. Fast Growing (~300 Daily Users)</div>
+        <div class="card-kr">빠르게 성장하는 활성 사용자 수</div>
+        <p class="card-desc">Rapid weekly expansion from 200 → 250 → almost 300 daily active campus users.</p>
       </div>
-      <footer class="slide-footer">
-        <div>Course Name</div>
-        <div class="footer-controls">
-          <button class="btn-prev" onclick="prevSlide()">Previous</button>
-          <button class="btn-next" onclick="nextSlide()">Next</button>
-        </div>
-        <div>Slide <span class="counter">2 / 3</span></div>
-      </footer>
-    </section>
 
-    <!-- Slide 3 -->
-    <section class="slide">
-      <div class="tag">Deployment</div>
-      <div class="content">
-        <h1>Publishing to GitHub Pages</h1>
-        <p>Deploy your built HTML, CSS, and JS static assets to a live public server.</p>
+      <div class="card">
+        <div class="card-title">2. Always Hungry Target Audience</div>
+        <div class="card-kr">식사 메뉴를 찾는 구매 의도 높은 학생</div>
+        <p class="card-desc">Students check daily cafeteria menus, making it prime spot to feature nearby food options.</p>
       </div>
-      <footer class="slide-footer">
-        <div>Course Name</div>
-        <div class="footer-controls">
-          <button class="btn-prev" onclick="prevSlide()">Previous</button>
-          <button class="btn-next" onclick="nextSlide()">Next</button>
+
+      <div class="card">
+        <div class="card-title">3. Rotating Live Placement</div>
+        <div class="card-kr">시선을 사로잡는 라이브 자동 배너</div>
+        <p class="card-desc">Catchy dynamic visual banners directly presented to students deciding where to eat.</p>
+      </div>
+    </div>
+
+    <div class="slide-footer">
+      <div class="nav-btns">
+        <button class="nav-btn btn-prev" onclick="prevSlide()">← Prev</button>
+        <button class="nav-btn btn-next" onclick="nextSlide()">Next →</button>
+      </div>
+      <div class="footer-num">02 / 05</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Video / GIF Demo Place -->
+  <div class="slide">
+    <div>
+      <div class="badge">Live Demo</div>
+      <h2 class="title">See the Carousel Banner in Action</h2>
+      <div class="title-kr">실제 라이브 회전 배너 시연</div>
+    </div>
+
+    <!-- MEDIA PLACEHOLDER BOX -->
+    <div class="media-box" id="mediaContainer">
+      <div id="placeholderText">
+        <p style="font-size:28px; margin:0 0 6px 0;">🎬</p>
+        <p style="font-weight:bold; color:#fff; margin:0 0 4px 0;">Video / GIF Placeholder</p>
+        <p style="font-size:11px; margin:0;">Replace this element with your clip or MP4</p>
+      </div>
+
+      <!-- 
+        ========================================================================
+        HOW TO LOAD YOUR VIDEO OR GIF LATER:
+        ========================================================================
+        Option A (Animated GIF):
+        Uncomment the line below and replace "your_carousel_demo.gif" with your file path:
+        <img src="your_carousel_demo.gif" alt="Live Carousel Demo">
+
+        Option B (Short MP4 Video):
+        Uncomment the video block below and replace "your_carousel_demo.mp4" with your video path:
+        <video autoplay loop muted playsinline>
+          <source src="your_carousel_demo.mp4" type="video/mp4">
+        </video>
+        ========================================================================
+      -->
+    </div>
+
+    <div class="slide-footer">
+      <div class="nav-btns">
+        <button class="nav-btn btn-prev" onclick="prevSlide()">← Prev</button>
+        <button class="nav-btn btn-next" onclick="nextSlide()">Next →</button>
+      </div>
+      <div class="footer-num">03 / 05</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Old vs New Plan Comparison -->
+  <div class="slide">
+    <div>
+      <div class="badge">Plan Comparison</div>
+      <h2 class="title">Static Banner vs Interactive Carousel</h2>
+      <div class="title-kr">기존 고정 배너 vs 신규 카러셀 배너 비교</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- Old Plan -->
+      <div class="plan-card plan-old">
+        <div>
+          <span style="font-size:9px; font-weight:bold; background:#9ca3af; color:white; padding:2px 6px; border-radius:4px;">DISCONTINUED</span>
+          <h3 style="font-size:13px; margin:6px 0 2px 0;">Static Banner</h3>
+          <div style="font-size:10px; color:#6b7280; font-weight:bold;">기존 고정 배너</div>
+          <div class="price-tag" style="color:#6b7280;">₩30,000 <span style="font-size:10px; font-weight:normal;">/wk</span></div>
+          <p style="font-size:11px; margin:0; line-height:1.3;">Static image, promotional slogan, map link. Single fixed store display.</p>
         </div>
-        <div>Slide <span class="counter">3 / 3</span></div>
-      </footer>
-    </section>
+      </div>
 
-  </main>
+      <!-- New Plan -->
+      <div class="plan-card plan-new">
+        <div>
+          <span style="font-size:9px; font-weight:bold; background:var(--green); color:white; padding:2px 6px; border-radius:4px;">MOST POPULAR</span>
+          <h3 style="font-size:13px; margin:6px 0 2px 0;">Live Carousel</h3>
+          <div style="font-size:10px; color:var(--green); font-weight:bold;">신규 라이브 카러셀</div>
+          <div class="price-tag" style="color:var(--green);">₩20,000 <span style="font-size:10px; font-weight:normal;">/wk</span></div>
+          <p style="font-size:11px; margin:0; line-height:1.3;">Shared top spot (max 3 stores). Live hours indicator, interactive motion & lower cost!</p>
+        </div>
+      </div>
+    </div>
 
-  <script>
-    const canvas = document.getElementById('canvas');
-    const slides = document.querySelectorAll('.slide');
-    let currentIndex = 0;
+    <div class="slide-footer">
+      <div class="nav-btns">
+        <button class="nav-btn btn-prev" onclick="prevSlide()">← Prev</button>
+        <button class="nav-btn btn-next" onclick="nextSlide()">Next →</button>
+      </div>
+      <div class="footer-num">04 / 05</div>
+    </div>
+  </div>
 
-    // 1. Maintain fixed 16:9 scale dynamically
-    function autoScale() {
-      const scaleX = window.innerWidth / 1920;
-      const scaleY = window.innerHeight / 1080;
-      const scale = Math.min(scaleX, scaleY);
-      canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
-    }
-    window.addEventListener('resize', autoScale);
-    autoScale();
+  <!-- SLIDE 5: Call to Action -->
+  <div class="slide slide-dark">
+    <div style="text-align:center; margin:auto 0; display:flex; flex-direction:column; justify-content:center; height:100%;">
+      <div class="badge" style="margin:0 auto 12px auto;">Get Ahead</div>
+      <h2 class="title" style="color:#fff; font-size:24px;">Become the #1 Choice When Students Are Hungry</h2>
+      <div class="title-kr" style="color:#a8a29e; font-size:14px; margin-bottom:20px;">배고픈 학생들이 가장 먼저 떠올리는 매장이 되세요</div>
 
-    // 2. Navigation logic
-    function showSlide(index) {
-      if (index < 0 || index >= slides.length) return;
-      
-      slides[currentIndex].classList.remove('active');
-      currentIndex = index;
-      slides[currentIndex].classList.add('active');
-      
-      updateControls();
-    }
+      <div class="card" style="background:#292524; border-color:#444; color:#fff; text-align:left;">
+        <p style="margin:0 0 6px 0; font-size:13px;">✓ <strong>Lock in the ₩20,000/week promo rate</strong> (주 2만원 서포트가)</p>
+        <p style="margin:0 0 6px 0; font-size:13px;">✓ <strong>Share shop photo & slogan</strong> (사진/문구만 전달하면 끝)</p>
+        <p style="margin:0; font-size:13px;">✓ <strong>Live in under 5 minutes</strong> (5분 내 세팅 완료)</p>
+      </div>
 
-    function nextSlide() {
+      <a href="https://open.kakao.com" class="cta-btn">Join Smart Advertisement Today →</a>
+    </div>
+
+    <div class="slide-footer">
+      <div class="nav-btns">
+        <button class="nav-btn btn-prev" onclick="prevSlide()">← Prev</button>
+        <button class="nav-btn btn-next" onclick="nextSlide()">Next →</button>
+      </div>
+      <div class="footer-num" style="color:#a8a29e;">05 / 05</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    if (index < 0 || index >= slides.length) return;
+    slides[currentIndex].classList.remove('active');
+    currentIndex = index;
+    slides[currentIndex].classList.add('active');
+    updateControls();
+  }
+
+  function nextSlide() {
+    if (currentIndex < slides.length - 1) {
       showSlide(currentIndex + 1);
     }
+  }
 
-    function prevSlide() {
+  function prevSlide() {
+    if (currentIndex > 0) {
       showSlide(currentIndex - 1);
     }
+  }
 
-    function updateControls() {
-      const currentSlide = slides[currentIndex];
-      const prevBtn = currentSlide.querySelector('.btn-prev');
-      const nextBtn = currentSlide.querySelector('.btn-next');
-      const counter = currentSlide.querySelector('.counter');
+  function updateControls() {
+    slides.forEach((slide, idx) => {
+      const prevBtn = slide.querySelector('.btn-prev');
+      const nextBtn = slide.querySelector('.btn-next');
+      if (prevBtn) prevBtn.disabled = idx === 0;
+      if (nextBtn) nextBtn.disabled = idx === slides.length - 1;
+    });
+  }
 
-      if (prevBtn) prevBtn.disabled = currentIndex === 0;
-      if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
-      if (counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+  // 1. Keyboard Arrow & Space Navigation
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft') {
+      prevSlide();
     }
+  });
 
-    // 3. Keyboard arrow navigation
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        nextSlide();
-      } else if (e.key === 'ArrowLeft') {
-        prevSlide();
-      }
-    });
+  // 2. Touch / Swipe Navigation for Mobile
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-    // 4. Touch swipe navigation
-    let touchStartX = 0;
-    window.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
+  window.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
 
-    window.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > 50) { // minimum distance threshold
-        if (diff > 0) nextSlide(); // Swiped left
-        else prevSlide();          // Swiped right
-      }
-    });
+  window.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+    const diffX = touchStartX - touchEndX;
+    const diffY = touchStartY - touchEndY;
 
-    // Initial state setup
-    updateControls();
-  </script>
+    // Trigger slide change if horizontal drag is dominant and over threshold
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) nextSlide(); // Swiped left -> Next
+      else prevSlide();          // Swiped right -> Previous
+    }
+  }, { passive: true });
+
+  // Initial State Setup
+  updateControls();
+</script>
+
 </body>
 </html>
